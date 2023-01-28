@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Creating the XBS Card Maker"
+title:  "Creating the XBS Card Maker - Part 1"
 date:   2023-01-29 15:20:55 -0500
 categories: personal-projects
 ---
@@ -23,7 +23,7 @@ After looking through several hockey cards online, I decided on the basic struct
 - Description of the player
 - Some graphics, that I'd figure out later
 
-## Getting the Data
+## Part 1: Pulling the Data
 
 Retrieving the data would be the first problem.  The league has 100+ players across 10+ teams, and doing all of this by hand would not be feasible in the slightest.  
 
@@ -111,9 +111,4 @@ Namely:
 
 Regardless, I now had the data I needed for the cards to be built.  The next thing I needed was the cards themselves. 
 
-## Designing the Card 
-
-This is where I ran into my first major problem - I am not a graphics designer! I'm admittedly terrible at anything graphics related.  It's why I spent most of my software career as a backend developer.  Given a layout, sure, I can mimic what you want.  Ask me to design something myself and you'll get the classic "second year CS grad" output.
-
-## Assembling the Card
 
