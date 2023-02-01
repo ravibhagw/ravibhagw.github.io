@@ -5,7 +5,7 @@ date:   2023-01-29 15:20:57 -0500
 categories: personal-projects
 ---
 
-As a tech geek at heart, I love finding ways of using code to do interesting things. One of the more interesting personal projects I took on last year was building a hockey card maker for an online hockey game league I like to play in a couple of nights a week.  
+As a tech geek at heart, I love finding ways of using code build fun things that reasonate with me. One of the more interesting personal projects I took on last year was building a hockey card maker for an online hockey game league I like to play in a couple of nights a week.  
 
 This post seems like a great way to break down that project and summarize the approach.  As you'll discover, I ran into some interesting challenges putting this together. All in all this project looked deceptively simple on the surface, but wound up being tremendously complex.  It's one of the more complicated things I've taken on for a side project, and one of the first times I've melded an idea, a bit of creativity, and a lot of code to make something interesting.
 
@@ -109,8 +109,6 @@ Skaters were trickier, because we had to accumulate the Center, Wing, and Defens
 Here we get to benefit from the power of reflection, LINQ, and the ability to use weak-typing in a strongly-typed language, summing up the values from each position for the target season with a weakly-typed property field, allowing us to re-use the `Accumulate` method across any integer-based stat (I.E most of them).
 
 
-TODO: Request target season
-
 Reflection allowed me to use weak typing.  I could specify a field name and use reflection alongside LINQ to accumulate the stats where needed.  
 
 ### Retrieving the Xbox Avatar with a GET request
@@ -156,6 +154,8 @@ How do you choose the right team, when the teams played list is per position? Si
 |Team 2| 0, null, null |
 |Team 3| 1, 1, null |
 
+From there I had some logic to determine what the most appropriate index was.  The logic was not that robust and guessed the start/middle indexes, but was accurate in all cases for the last team, which was the only one we cared about. 
+
 ### Resolving the Position
 
 Now that we have the player's team, we need to select the best appropriate position for the team.  This was another neat little piece of LINQ code, thanks to enumeration and collections in C#.
@@ -169,10 +169,6 @@ Once we'd inserted the key/value pairs for each position in, we can run this pie
 `var position = valueMap.Aggregate((selected, next) => selected.Value > next.Value ? selected : next).Key;`
 
 `Aggregate()` iterates over every element in the collection, and foreach element evaluates the supplied function.  The returned value becomes the `selected` value passed to compare against the `next` value, solving for the max value and returning the `Key` (position name).
-
-### One Last Team Name Resolution Wrinkle
-
-From there, there was just one last problem 
 
 ### Rendering the Card
 
@@ -229,7 +225,7 @@ The code worked well.  With the supplied input data it was able to iterate over 
 
 ![](/assets/final_card.png)
 
-The graphics and design certainly leave something to be desired, but the key elements are all here:
+The graphics and design certainly leave something to be desired (remember, I'm not a graphics person!), but the key elements are all here:
 
 - Player's name (gamertag)
 - Team name
@@ -239,4 +235,23 @@ The graphics and design certainly leave something to be desired, but the key ele
 - Some graphics
 
 
-It sure beats building 120 cards from scratch! 
+The summary needed to be written manually, which I did after quickly glancing over the player's stats. 
+
+All things considered though, the investment in this code saved a tremendous amount of time.  I was able to generate 160 cards across 16 teams relatively effortlessly.  The full set of cards are here:
+
+- https://imgur.com/a/oxBAurj
+- https://imgur.com/a/rVyIug9
+- https://imgur.com/a/pkRzFTV
+- https://imgur.com/a/38I5ohz
+- https://imgur.com/a/Q9uA5Cr
+- https://imgur.com/a/XVKURYv
+- https://imgur.com/a/Dhn3pgk
+- https://imgur.com/a/iNm6qqw
+- https://imgur.com/a/iEKeubY
+- https://imgur.com/a/Wa0nnoA
+- https://imgur.com/a/nhViY8f
+- https://imgur.com/a/LeT61pq
+- https://imgur.com/a/0B1GVH1
+- https://imgur.com/a/nvJd3QZ
+- https://imgur.com/a/BA8fYLM
+- https://imgur.com/a/roRqSzc

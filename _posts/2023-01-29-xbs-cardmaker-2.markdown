@@ -5,7 +5,7 @@ date:   2023-01-29 15:20:56 -0500
 categories: personal-projects
 ---
 
-As a tech geek at heart, I love finding ways of using code to do interesting things. One of the more interesting personal projects I took on last year was building a hockey card maker for an online hockey game league I like to play in a couple of nights a week.  
+As a tech geek at heart, I love finding ways of using code build fun things that reasonate with me. One of the more interesting personal projects I took on last year was building a hockey card maker for an online hockey game league I like to play in a couple of nights a week.  
 
 This post seems like a great way to break down that project and summarize the approach.  As you'll discover, I ran into some interesting challenges putting this together. All in all this project looked deceptively simple on the surface, but wound up being tremendously complex.  It's one of the more complicated things I've taken on for a side project, and one of the first times I've melded an idea, a bit of creativity, and a lot of code to make something interesting.
 
@@ -39,6 +39,7 @@ First, some templates I didn't go with:
 Note: I later re-used this Vegas template for some draft day cards.  The original version of this was not nearly as well-polished
 
 The final version looked something like this:
+
 ![final](/assets/boston_censored.png)
 
 The final choice was simpler, but useful for a few reasons:
@@ -52,4 +53,4 @@ The final choice was simpler, but useful for a few reasons:
 
 The code to build the card could load these templates and use fixed points in the image to render any overlay images or text I needed.  There was lots of blank space and flexibility.  These templates would be an excellent canvas to start assembling the hockey cards. 
 
-
+Now that I had the templates I needed, I could start writing code to merge all of these together into a sensible output. 
