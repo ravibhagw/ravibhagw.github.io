@@ -1,0 +1,70 @@
+---
+layout: post
+title:  "Getting AWS Certified (as an Azure person)"
+date:   2023-02-022 15:20:57 -0500
+categories: learning
+---
+
+For the last 7+ years of my career, I've been all-in on the Microsoft stack.  My previous employer was fully Microsoft stack and ran out of a traditional datacenter for much of my time there (MSSQLServer, ASP.NET/C#, Windows Servers, IIS).  When the time came to migrate to the cloud, our approach was to go in on the Azure cloud by default, and choose alternative technologies/solutions where appropriate. 
+
+Our resulting infrastructure was a mix of:
+
+- Azure SQL databases, with CosmosDB where it made sense to refactor for that DB tech
+- Azure WebApps for Containers, to containerize new services or extracted components of our monolith without managing the underlying infrastructure
+- Azure Functions, to replace elements of our background jobs to be triggered 
+- Azure VM running Windows Server to host our monolith, because we had too many legacy dependencies to move to .NET Core
+  - Note that we were "hybrid-cloud" for a while, as lift/shifting the monolith and decomposing it lagged behind new services being built natively in the cloud
+
+
+There's some non-Microsoft tidbits there (Terraform for IaC, Kafka for eventing, Dynatrace for monitoring, Hashicorp Vault for secrets management, etc etc including some fun complexity with software providers offering managed services in AWS but not Azure).  Not all of this was realized when I left, and a year later perhaps things have changed, but this certainly was the plan that was well in-motion at the time. 
+
+Needless to say, all of my experience to date has been in *Azure*.  In moving to AWS, I found that I understood many of the concepts I needed, but struggled with terminology.  At worst, there were pieces of jargon and TLAs throw around that I would have trouble following along with. At best, I could listen to someone talking about pieces and translate it in my head. 
+
+<insert nice translation layer diagram here>
+
+Eventually, I was going to need to learn how to think in AWS terms.  To achieve this, I pushed myself to complete the AWS Certified Cloud Practicioner Exam.
+
+## Why CCP vs SAA?
+
+There's mixed advice on whether to take the CCP exam vs the SAA.  My rationale was as follows:
+
+1. I am in a management role right now.  I need to understand the possibilities of the cloud, not necessarily how to implement them
+2. I don't use the cloud technologies enough day-to-day to be able to go in-depth with the services
+3. In-depth, hands-on experience with the services
+4. I can always do it later, after I've had more time to play with it on my own first
+
+## What did you learn in the process?
+
+First and foremost, a glance at a [comparison list](https://learn.microsoft.com/en-us/azure/architecture/aws-professional/services) should tip you off to the fact that Azure's naming conventions are (mostly) more intuitive, IMO.  
+
+Secondly, at the scope level 
+
+Thirdly, the CCP exam
+
+## Any tips for the exam?
+
+Yes, which is mostly why I chose to write this blog post! 
+
+### You will never get 100%
+
+My mentality has always been to target 90-100% on any type of academic test I do.  The AWS CCP covers an enormous range of services, technologies, concepts, etc.  Despite how much you study and learn, there will be simple nuances you miss.  You probably aren't going to get 100% because there's far more information you'll need to learn than you have capacity to store (and willingness to learn)
+
+If you are reading this and somehow managed to get 100%, hats off to you.  You're a much smarter person than I :) 
+
+### Your on-the-job experience isn't enough -- invest in training materials
+
+I'm convinced that even if you've been using the AWS cloud for years, you'll still need to study practice materials.  Your job role likely focuses your scope on specific areas relevant to what you/your organization use.  There was a *lot* of material on EC2 pricing for example, something that isn't as relevant to someone in my situation whose org uses containerized applications. 
+
+### The training materials aren't enough -- invest in practice exams
+
+Even the training materials aren't enough.  AWS Skillbuilder has a Cloud Essentials Learning Path that, after completion, helped me score about a 70% (bare passing grade) on my first practice exam.
+
+### Read the question carefully
+
+### READ THE QUESTION CAREFULLY!!
+
+I mean it!  Seriously, *read the question carefully*
+
+### Identify key words in the question that apply to the answer
+
+### Proceed with confidence 
