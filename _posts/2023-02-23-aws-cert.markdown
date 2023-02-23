@@ -30,7 +30,7 @@ plus some non-Microsoft stuff like:
 
 I'm sure there's things I'm forgetting too. 
 
-Needless to say, all of my experience to date has been in *Azure*, or via a managed service hosted on Azure (minus an edge case where a managed service was only available on AWS, but that's a different story).
+Needless to say, all of my experience to date has been *in* Azure, or via a managed service hosted *on* Azure (minus an edge case where a managed service was only available on AWS, but that's a different story).
 
 In moving to AWS, I found that I understood many of the concepts I needed, but struggled with terminology.  At worst, there were pieces of jargon and TLAs throw around that I would have trouble following along with. At best, I could listen to someone talking about pieces and translate it in my head.  Somewhere in the middle there would be a concept I took for granted as being true/false in Azure that wasn't the case in AWS, but this was pretty rare. 
 
@@ -38,65 +38,152 @@ I found that I was always applying a translation layer when working with others,
 
 <insert nice translation layer diagram here>
 
-Eventually, I was going to need to learn how to think in AWS terms.  To accomplish this, I pushed myself to complete the AWS Certified Cloud Practicioner certification.  I figured that simply studying the material once wouldn't work for establishing that "AWS-native" thinking ability, and that completing the exam was the perfect way to push myself to study the material deeply enough to 
+Eventually, I was going to need to learn how to think in AWS terms.  To accomplish this, I pushed myself to complete the AWS Certified Cloud Practicioner certification.  I figured that simply studying the material once wouldn't work for establishing that "AWS-native" thinking ability, and that completing the exam was the perfect way to push myself to study the material deeply enough to make it stick.
 
-## Why CCP vs SAA?
+## Why CCP over the other options?
 
-There's mixed advice on whether to take the CCP exam vs the SAA.  My rationale was as follows:
+There's mixed advice on whether to take Foundational-level CCP certification, considered optional in most AWS certification paths, versus going directly for an Associate-level certification like the SAA.
+
+My thought process was as follows:
 
 1. I am in a management role right now.  I need to understand the possibilities of the cloud, not necessarily how to implement them
-2. I don't use the cloud technologies enough day-to-day to be able to go in-depth with the services
-3. In-depth, hands-on experience with the services doesn't match my immediate need of "removing the translation layer" 
-4. I can always do it later, after I've had more time to play with it on my own first
+2. I don't use the cloud technologies enough day-to-day to be able to go in-depth with the services (see #1)
+3. In-depth, hands-on experience with the services doesn't match my immediate need of moving from thinking in Azure with an AWS translation layer to thinking "AWS-native", and CCP gives me a quicker turnaround time to accomplish that goal
+4. I can revisit it later on
 
-For the time being, I do not regret this choice.  For someone who is net-new to the cloud or moving from one cloud provider to another, I think CCP is an excellent choice to build your foundational knowledge or reinforce the mappings you need to make in the transition. 
+For the time being, I do not regret this choice.  For someone who is net-new to the cloud or moving from one cloud provider to another, I think CCP is an excellent choice to build your foundational knowledge of AWS.
 
-If you are actively working in a technical area and see yourself leaning towards one of the specific technical tracks (Developer, Operations, or Architect), I'd suggest going with one of those paths and default to Architect unless you have a specific desire to learn the Developer or Operations routes. 
-
+If you are actively working in a technical area and see yourself leaning towards one of the specific technical tracks (Developer, Operations, or Architect), perhaps jumping directly to an associate-level is better. 
 
 ## Any tips for the exam?
 
-Yes, which is mostly why I chose to write this blog post! 
+Yes, which is mostly why I chose to write this blog post! There's countless posts and videos on materials, study strategies, and best practices, which I'll skip over here.  This list will focus more on my thoughts and experiences preparing for and completing the exam. 
 
-### You will never get 100%
+### 1. You're unlikely to score 100%
 
-My mentality has always been to target 90-100% on any type of academic test I do.  The AWS CCP covers an enormous range of services, technologies, concepts, etc.  Despite how much you study and learn, there will be simple nuances you miss.  You probably aren't going to get 100% because there's far more information you'll need to learn than you have capacity to store (and willingness to learn).
+My mentality has always been to target 90-100% on any type of academic test I do.  The AWS CCP covers an enormous range of services, technologies, concepts, etc.  Despite how much you study and learn, there will be details you miss.  You probably aren't going to get 100% because there's far more information you'll need to learn than you have capacity to store (and willingness to learn).
 
-The AWS CCP covers a [large list of topics]() spanning a [huge range of services](), and questions are derived from the [FAQs](). 
+The AWS CCP covers a [large list of topics](https://d1.awsstatic.com/training-and-certification/docs-cloud-practitioner/AWS-Certified-Cloud-Practitioner_Exam-Guide.pdf), and questions are derived from the core topics plus FAQs.  In theory, you could get a question about [using Lightsail with CloudFront](https://aws.amazon.com/lightsail/faq/) because it *is* technically in the exam guide, but might not be something you cover or even care about. 
 
-On top of that, it's difficult to write multiple choice questions in a way that are both clearly understandable without being blatantly obvious.
+On top of that, it's difficult to write multiple choice questions in a way that are both clearly understandable without being blatantly obvious, so you will encounter the odd question that is a little bit ambiguous.
 
 There's just far too much material to be covered, but if you can cover *all of the topics* at a minimum you should be in a good place. 
 
-If you are reading this and somehow managed to get 100%, hats off to you!!
+By the way, if you are reading this and somehow managed to get 100%, hats off to you!!
 
-### Your on-the-job experience isn't enough -- invest in training materials
+### 2. Your on-the-job experience isn't enough -- invest in training materials
 
 I'm convinced that even if you've been using the AWS cloud for years, you'll still need to study practice materials.  Your job role likely focuses your scope on specific areas relevant to what you/your organization use.  There was a *lot* of material on EC2 pricing for example, something that isn't as relevant to someone in my situation whose org uses containerized applications. 
 
-### The training materials aren't enough -- invest in practice exams
+The CCP isn't "track-specific" in that it leans towards one of Operations, Architecture, or Development.  It covers a lot of core cloud concepts, gleans a little bit from each of those paths, and has a definite focus on costing, billing, etc.  In my years working in Azure I never had to set up my own VPN, but I needed to understand Amazon VPCs in good detail to pass some of the material.  Thankfully I have a bit of a networking background (I still remember how to calculate IPv4 IPs by counting bits, thank you CCNA!!) so there were some topics I knew without having to explicitly studying them! 
 
-Even the training materials aren't enough.  AWS Skillbuilder has a Cloud Essentials Learning Path that, after completion, helped me score about a 70% (bare passing grade) on my first practice exam.
+### 3. The training materials aren't enough -- invest in practice exams
 
-### Read the question carefully
+Even the training materials aren't enough.  AWS Skillbuilder has a Cloud Essentials Learning Path that, after completion, helped me score about a 70% (bare passing grade) on my first practice exam.  The courses were fine and set me up with the core knowledge, but didn't cover anything in enough depth to answer basic questions.  
 
-Multiple choice questions are deceptively tricky.  They'll use negatives where you don't expect them, IE "Which of these is not a benefit of using PaaS over IaaS". 
+What really helped me was investing in practice exams, which helped fill gaps in knowledge and gave me a taste of what the real test questions would look like.  
 
-### READ THE QUESTION CAREFULLY!!
+I used practice exams from Udemy and O'Reilly. I liked the Udemy ones in particular because they explained why the right answers were right, why the wrong answers were wrong, and provided reference links for more information.  Studying the questions you get wrong across ~6-8 practice exams will put you in a good position to fill in enough of the knowledge gaps.  
 
-I mean it!  Seriously, *read the question carefully*
+### 4. Learn with Terraform
 
-### Identify key words in the question that apply to the answers
+Using the [Terraform docs](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/instance) turned out to be a powerful study trick.  It's an easy way to look over declarative statements/structures that illustrate how services work and how they're configured. 
 
-I.E "Which of these does not reflect operational excellence pillar of AWS Well-Architected Framework".  You can expect all of the answers to be "correct" in the sense that they are all part of the AWS Well-Architected Framework, but not wholly correct.  They might give you an option of "match capacity with demand", which might fit better under
+Just by looking at `aws_instance` for example, you see how AMIs are associated with the EC2 instance, how the instance type is specified, how the VPC can be declaratively configured, etc.
 
-### Test taking is a skill unto itself.  Refresh yourself on it
+```
+data "aws_ami" "ubuntu" {
+  most_recent = true
 
-It's been a long time since I've been in school. 
+  filter {
+    name   = "name"
+    values = ["ubuntu/images/hvm-ssd/ubuntu-focal-20.04-amd64-server-*"]
+  }
 
-### Proceed with confidence 
+  filter {
+    name   = "virtualization-type"
+    values = ["hvm"]
+  }
 
-The middle of the test is not the time to doubt yourself. 
+  owners = ["099720109477"] # Canonical
+}
+
+resource "aws_instance" "web" {
+  ami           = data.aws_ami.ubuntu.id
+  instance_type = "t3.micro"
+
+  tags = {
+    Name = "HelloWorld"
+  }
+}
+
+resource "aws_vpc" "my_vpc" {
+  cidr_block = "172.16.0.0/16"
+
+  tags = {
+    Name = "tf-example"
+  }
+}
+
+resource "aws_subnet" "my_subnet" {
+  vpc_id            = aws_vpc.my_vpc.id
+  cidr_block        = "172.16.10.0/24"
+  availability_zone = "us-west-2a"
+
+  tags = {
+    Name = "tf-example"
+  }
+}
+
+resource "aws_network_interface" "foo" {
+  subnet_id   = aws_subnet.my_subnet.id
+  private_ips = ["172.16.10.100"]
+
+  tags = {
+    Name = "primary_network_interface"
+  }
+}
+
+resource "aws_instance" "foo" {
+  ami           = "ami-005e54dee72cc1d00" # us-west-2
+  instance_type = "t2.micro"
+
+  network_interface {
+    network_interface_id = aws_network_interface.foo.id
+    device_index         = 0
+  }
+
+  credit_specification {
+    cpu_credits = "unlimited"
+  }
+}
+```
+
+Should I proceed with another certification, I'll definitely dig deeper on this approach! 
+
+### 5. Read the question carefully
+
+Multiple choice questions are hard to write, and can be deceptive.  They'll use negatives where you don't expect them, and occasionally have confusing wording.  In lengthier questions, there will be key points that are relevant and details that are irrelevant to the answer, and which is which won't always be obvious on the first read. 
+
+### 6. READ THE QUESTION CAREFULLY!!
+
+I mean it!  Seriously, *read the question carefully*.  Read it twice.  Read it three times.  Every time you read an answer, read the question followed by the answer. 
+
+### 7. Identify key words in the question that apply to the answers
+
+You'll encounter questions where every answer is a true statement, but is not a correct answer based on the phrasing of the question.  Many of the AWS Well-Architected Framework questions are like this, where every answer you see is included in the Well-Architected Framework, but doesn't apply to the specific pillar requested in the question. If you don't read the question carefully, you will cue in on "Well-Architected" and may hastily choose the wrong asnwer. 
+
+### 8. Test taking is a skill unto itself.  Refresh yourself on it
+
+It's been a while since I've been in exam mode.  When learning new things for work or fun, I typically absorb the material and look to apply it to solifidy my knowledge.  Having to regurgitate that knowledge in the form of multiple-choice questions has not been something I've done in a while.  
+
+For anyone in the same boat, I'd suggest a refresher on how to take multiple choice questions, and a primer on how to study for memorization.  Love it or hate it, memorization is a key component.
+
+I made flash cards to help with that :) 
+
+### 9. Proceed with confidence 
+
+Don't doubt yourself in the middle of the exam.  
 
 
 ## What did you learn in the process?
