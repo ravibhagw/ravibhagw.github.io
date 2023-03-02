@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Getting AWS Certified (as an Azure person)"
-date:   2023-02-022 15:20:57 -0500
+date:   2023-02-22 15:20:57 -0500
 categories: learning
 ---
 
