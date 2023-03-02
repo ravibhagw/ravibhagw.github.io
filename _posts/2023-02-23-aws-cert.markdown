@@ -5,7 +5,7 @@ date:   2023-02-022 15:20:57 -0500
 categories: learning
 ---
 
-For the last 7+ years of my career, I've been all-in on the Microsoft stack.  My previous employer was fully Microsoft stack and ran out of a traditional datacenter for much of my time there (MSSQLServer, ASP.NET/C#, Windows Servers, IIS).  When the time came to migrate to the cloud, our approach was to go in on the Azure cloud by default, and choose alternative technologies/solutions where appropriate. 
+For the last 7 years of my career, I've been all-in on the Microsoft stack.  My previous employer was fully Microsoft stack and ran out of a traditional datacenter until about 2017 (MSSQLServer, ASP.NET/C#, Windows Servers, IIS).  When the time came to migrate to the cloud, our approach was to go in on the Azure cloud by default, and choose alternative technologies/solutions where appropriate. 
 
 Most of my hands-on experience in the Azure cloud is with these technologies: 
 
@@ -30,13 +30,13 @@ plus some non-Microsoft stuff like:
 
 I'm sure there's things I'm forgetting too. 
 
-Needless to say, all of my experience to date has been *in* Azure, or via a managed service hosted *on* Azure (minus an edge case where a managed service was only available on AWS, but that's a different story).
+Needless to say, all of my experience to date has been *in* Azure, or via a managed service hosted *on* Azure.  There were a few edge cases where managed services lived in AWS, which eventually spawned an ugly multi-cloud/hybrid-cloud design, but that's a story for another day! 
 
 In moving to AWS, I found that I understood many of the concepts I needed, but struggled with terminology.  At worst, there were pieces of jargon and TLAs throw around that I would have trouble following along with. At best, I could listen to someone talking about pieces and translate it in my head.  Somewhere in the middle there would be a concept I took for granted as being true/false in Azure that wasn't the case in AWS, but this was pretty rare. 
 
 I found that I was always applying a translation layer when working with others, by taking what they had explained to me but thinking about it in Azure terms. 
 
-<insert nice translation layer diagram here>
+![brain](/assets/brain.png)
 
 Eventually, I was going to need to learn how to think in AWS terms.  To accomplish this, I pushed myself to complete the AWS Certified Cloud Practicioner certification.  I figured that simply studying the material once wouldn't work for establishing that "AWS-native" thinking ability, and that completing the exam was the perfect way to push myself to study the material deeply enough to make it stick.
 
@@ -181,15 +181,17 @@ For anyone in the same boat, I'd suggest a refresher on how to take multiple cho
 
 I made flash cards to help with that :) 
 
+![flashcards](/assets/flashcards.jpg)
+
 ### 9. Proceed with confidence 
 
-Don't doubt yourself in the middle of the exam.  
+Don't doubt yourself in the middle of the exam.  Rather than gamble on picking a service you don't know that's mapped to a statement you don't fully understand, try to use the process of elimination.  There will be details you miss in the services, and some questions will try to use that to trip you up. 
 
 
 ## What did you learn in the process?
 
-First and foremost, a glance at a [comparison list](https://learn.microsoft.com/en-us/azure/architecture/aws-professional/services) should tip you off to the fact that Azure's naming conventions are (mostly) more intuitive.  Coming from Azure first, I'll always prefer those more intuitive names. 
+1. At glance at a [comparison list](https://learn.microsoft.com/en-us/azure/architecture/aws-professional/services) should tip you off to the fact that Azure's naming conventions are (mostly) more intuitive.  Coming from Azure first, I'll always prefer those more intuitive names. 
 
-Secondly, at the scope level 
+2. The CCP exam is broad and will cover a lot of technologies you'll never use and topics you'll never care about.  It's not a bad idea to have a broad base of knowledge, even if you'll lose it later in favour of deeper knowledge in specific areas. 
 
-Thirdly, the CCP exam is broad and will cover a lot of technologies you'll never use and topics you'll never care about.  It's not a bad idea to have a broad base of knowledge, even if you'll lose it later in favour of deeper knowledge in specific areas. 
+3. See point #8, test taking is its own skill.  If you've been out of school for a while, you'll need to practice!
