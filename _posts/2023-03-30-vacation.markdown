@@ -1,0 +1,33 @@
+---
+layout: post
+title:  "Deduplicating Vacation Files"
+date:   2023-03-29 15:20:57 -0500
+categories: personal-projects
+---
+
+I took a wonderful two-week vacation in March.  It was refreshing and fun, but limited the time and attention I needed to conjure up a monthly blog post.  As we speak (or rather as I type this), I *still* have a few piles of laundry that need to be taken care of! 
+
+That said, one interesting blog-worthy item to share this month is the process of deduplicating my vacation files.  My better half owns an iPhone, and I own a Windows PC.  I vehemently refuse to use iTunes, leaving me with the option to copy photos directly from the iPhone storage to my desktop.  
+
+iPhones have this live photo feature where they record a few seconds of video alongside the photo you take.  The end result is a `.mov` file and a `.jpg` file for every picture we took!  Mixed in with all of these files were the actual videos we took, meaning some ``.mov`` files were legitimate while others needed to be removed.  Factor in my better half's propensity for picture-taking and gigabytes worth of local device storage, and the end result is >3000 files that need to be sifted through!
+
+Rather than try to do all of that manually, I was able to whip up a quick Powershell script to help!
+
+```
+Get-ChildItem | ForEach-Object { 
+    if ((Test-Path ($_.BaseName + ".mov")) -and (Test-Path ($_.BaseName + ".JPG")) )
+    { 
+        Write-Host ("Moving " + $_.BaseName + ".mov"); Move-Item -Path ($_.BaseName + ".mov") -Destination "D:\dedup" 
+    } 
+}
+```
+
+There's nothing particularly complex here.  It lists the files, checks the basename for each, sees if there is an image and video version with the same basename, and moves the video file elsewhere.  I could probably just list the `.jpg` files, and if a corresponding `.mov` file exists take action to save some iterations, but quick and dirty works just fine for a script hastily written while my spouse impatiently waits to look through our pictures! :D 
+
+Now all of those pesky `.mov` files are in a completely different folder:
+
+![brain](/assets/dedup.png)
+
+The actual version was written entirely in the Powershell command prompt, so I used the aliases `ls` and `%`.  Come to think of it, I may have also set up a custom alias for `Test-Path` with the `Set-Alias` command to save some typing.  
+
+The script only took a few minutes to write, as I shook off some rusty Powershell knowledge, and the end result was that a manual process of identifying and removing 2000+ files manually was completed in the blink of an eye with a little bit of shell scripting! 
