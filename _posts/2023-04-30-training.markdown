@@ -1,0 +1,57 @@
+---
+layout: post
+title:  "Performance Zones"
+date:   2023-04-29 15:20:57 -0500
+categories: management
+---
+
+I couldn't make it too long into a management gig without a post on people management, right?
+
+Helping people thrive in their careers and grow their skills/capabilities is, in my mind, one of the most important aspects of people management.  Yes, there is a critical business delivery component and no, you can't always let people work on only the exciting stuff.  As much as possible though, it's beneficial to help people take on new challenges.  Developing people in your team and your organization helps them become more capable of taking on those critical business deliveries as the demands from your team shift and expand.
+
+I like to visualize it as follows:
+
+![zones1](/assets/zones1.jpg)
+
+This is my own opinion with no scientific background, though it's modelled slightly after [overtraining](https://statumentis.wordpress.com/2014/12/01/overtraining-is-of-great-importance-to-the-high-performance-athlete-we-need-to-gain-knowledge/)
+
+These zones are not always linear, and don't necessarily grow linearly.  Due to personal circumstance, energy levels, and a myriad of other personal and professional factors, these zones can fluctuate wildly.  In an ideal case, the amount of challenge one can take on increases over time. 
+
+# Understanding the Performance Zones
+
+Reading the titles of these zones as I've poorly named and coloured them, it would seem obvious that "Engaged Zone" is the optimal zone and that all other zones are bad, right?
+
+I disagree.  In my mind, **NONE OF THESE ZONES ARE BAD (in small doses)**, and everyone should experience all four to a varying degree. 
+
+## Bored Zone
+
+At the bottom of the chart we have the Bored Zone.  This is where an individual on your team is not challenged and simply going through the motions.  Maybe the work you've given them isn't interesting.  Maybe they've mastered what they're working on and are ready for a new challenge.  Maybe they've just been working on the same thing for too long.
+
+The Bored Zone is an essential one.  I'm of the firm belief that boredom sparks creativity and ingenuity. If you give a senior developer a boring repetitive task for example, you can almost guarantee that they'll find a way to automate it or eliminate it altogether.  
+
+It's also an important rest zone.  Sometimes if a developer has been overworked and stressed for too long, giving them some simple boring tasks can be a useful way to help them get on-the-job rest.  It can be refreshing to do some simple work, and the shortened action->reward cycle of a small task can have a positive impact on them.   Have you ever tried zeroing out your inbox?  Do you remember that sense of accomplishment doing a menial task to the tune of some music before checking it off your list?  Yup, that's the Bored Zone at work! 
+
+## Engaged Zone 
+
+The Engaged Zone is where people do their best work.  It's a comfortable state of being where someone is capable of doing their work and enjoys doing it.  Some people want to stay in this zone indefinitely.  I don't think that's a bad thing per-se, but note that the capacity for boredom increases over time.  Someone doing the same thing they've always done for too long a period of time risks slipping into the Bored Zone. 
+
+This is where you want to keep your developers *most* of the time.  This breeds the most happiness, engagement, and sustainable output from your developers.  Consider this your developers' core skills in their role.
+
+## Stretched Zone
+
+The Stretched Zone is a fine line between the maximum of what an individual can handle and being overwhelmed.  This is where you're giving someone a new challenge.  It could be more work, harder work, more complex work, or anything else of the sort.  Those seeking growth should regularly push into the stretched zone.  This is where people learn, grow, adapt, and develop the most. 
+
+You're challenging them to do something new.  This requires expanding upon existing skills and/or developing new skills.  It's not always comfortable, but it is useful change and growth. 
+
+## Stressed Zone
+
+The Stressed Zone is, simply, overexertion.  It's too much, to the point where someone can become overwhelmed or burnt out over time.  Much like boredom, I feel like a temporary spike into stress and fatigue can spark creativity and ingenuity. If you give a developer something overly challenging, they will be forced to adapt, compensate, or get creative.  It's the Streched Zone amped up even higher, but risks burning out much faster. 
+
+I would expect someone's jourey through these zones to look a bit like this:
+
+![zones2](/assets/zones2.jpg)
+
+The key is that they're spending *most* of their time in the Engaged Zone, occasionally dipping into the others.  
+
+# Personal Experiences
+
