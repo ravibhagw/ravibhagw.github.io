@@ -11,11 +11,13 @@ Helping people thrive in their careers and grow their skills/capabilities is, in
 
 I like to visualize it as follows:
 
-![zones1](/assets/zones1.jpg)
+![zones1](/assets/zones1.png)
 
 This is my own opinion with no scientific background, though it's modelled slightly after [overtraining](https://statumentis.wordpress.com/2014/12/01/overtraining-is-of-great-importance-to-the-high-performance-athlete-we-need-to-gain-knowledge/)
 
-These zones are not always linear, and don't necessarily grow linearly.  Due to personal circumstance, energy levels, and a myriad of other personal and professional factors, these zones can fluctuate wildly.  In an ideal case, the amount of challenge one can take on increases over time. 
+These zones are not always linear, and don't necessarily grow linearly.  Due to personal circumstance, energy levels, and a myriad of other personal and professional factors, these zones can fluctuate wildly.  Some days, no matter how trivial the task, you'll be stressed out.  Other days, no matter how exciting and invigorating, you'll be bored and a little bit disengaged.  This is not a failing -- it's being human. 
+
+In an ideal case though, the amount of challenge one can take on increases over time :)
 
 # Understanding the Performance Zones
 
@@ -49,9 +51,48 @@ The Stressed Zone is, simply, overexertion.  It's too much, to the point where s
 
 I would expect someone's jourey through these zones to look a bit like this:
 
-![zones2](/assets/zones2.jpg)
+![zones2](/assets/zones2.png)
 
 The key is that they're spending *most* of their time in the Engaged Zone, occasionally dipping into the others.  
 
 # Personal Experiences
 
+When thinking about these different performance zones, I like to reflect on my own career and remind myself how each of these have helped me.
+
+## Bored Zone
+
+I hit the bored zone towards the end of my tenure as a lead developer on APIs.  My team had put in plenty of work to build a core set of internal and external APIs for interacting with our domain.  Hexagonal architecture?  Implemented.  World-class documentation?  Already written.  Unit test coverage?  Literally the highest in the company.  Code autogeneration?  Implemented.  
+
+Simply put, there was little left to do. The project was complete, and we were iterating on and improving it in a stable and predictable manner.  It took us almost two years of hard work to get here, and it was fun for a few sprints to see the fruit of  The work was getting done, but it was no longer exciting or engaging.  I remember sitting at my desk one day after a backlog refinement session and thinking "is that it"?
+
+Sitting in the bored zone was the spark I needed to pursue further career growth. 
+
+## Engaged Zone
+
+It's hard to pick just one example, because this is where I feel developers should spend the majority of their time in a role. I believe your time spent here is directly related to your job satisfaction, and that incrementing responsibilities/workload on a basis that's suitable for you. 
+
+The engaged zone is where I feel *in the zone*.
+
+## Stretched Zone
+
+Rewinding the clock from my previous story, I found myself in the stretched zone when I first took over the lead position at that company.  I had been a lead developer before, but at that time I was only ~3 years into my career and frankly speaking not experienced enough with either technology or people to be effective.  I spent a few more years in a senior role at a new company, with the explicit goal of becoming a lead developer again.
+
+I found myself in a lead developer role again not too long after.  Our team wanted to move from "just go get it done" to actually providing estimates and communicating deliverables and timelines to stakeholders.  We did this with Scrum, and being the chatterbox I am, I was given those responsibilities.  It was a challenge at first, but a rewarding one no doubt.  It gave me a chance to flex my personality a bit more, and do more than just ship lines of code.  I had to take on Scrum Master duties, and learn to balance my own deliverables with unblocking the team.  For the first time in my career, I was not only producing code but helping others produce code more efficiently.
+
+The stretched zone helped me expand my skillset.
+
+## Stressed Zone
+
+People Management.  Thanks for reading!
+
+No, seriously though, that first foray into people management was an eyeopener.  Suddenly there were more stakeholders, more meetings, more accountability, more meetings, more interpersonal issues to solve, more meetings, more admin tasks, more meetings, and more.  Did I mention there were more meetings?  
+
+Anyone who knows me now may think of me as an organized person (zero inbox, Slack channels carefully curated, updated calendar, detailed to-do list, diligent notetaking), but that was not who I was when I first jumped into people management.  Sure, I took some notes down on paper, and yes I made sure to update my calendar, but the idea of a to-do list was mystifying.  Wasn't that the purpose of the sprint board?  Zero inboxing was equally foreign, because I could usually just glance at my inbox and tell what was from the build agent and what was from a co-worker or adjacent team.
+
+The initial firehose of information was overwhelming.  I had information overload and, as a new manager, lacked the heuristic to filter out the important from the noise.  Admist this overload of information, I sought out anything I could -- mentors, books, articles, tech-talks, blog posts, etc.  If it existed, I consumed it.  I tried Trello boards, paper notes, creating blocks for everything on my calendar, sticky notes all over my monitor (no passwords, I promise!).  Eventually, I found a system that worked for me.  It was stressful, and there were days I wanted to give up and go back to my IDE, but in the long-run those skills have made me far more effective.  Without those, I don't think I'd have found a way to commit myself to maintaining a monthly(ish) blog, after all.
+
+The stressed zone forced me to improvise, adapt, and overcome.
+
+# Applying These Zones
+
+I try to keep mindful of these zones when I'm managing my direct reports.  It's as much an art as it is a science, and it's not something you always get right.  Getting to know your direct reports and understanding their skillsets, strengths, weaknesses, ambitions, development paths, etc is key to making this work for you.  I've been fortunate enough to help guide struggling intermediate developers into senior+ roles and guide seniors into managerial roles by tactfully applying these principles and giving them the appropriate challenges (or lack thereof) where I felt it was needed.  Regular touchpoints and appropriate levels of guidance and support are needed to make this work, especially when you're pushing someone outside of their comfort zone and potentially causing tolerable/manageable stress. 
