@@ -1,0 +1,248 @@
+---
+layout: post
+title:  "Analyzing a (videogame) hockey league with ChatGPT"
+date:   2023-07-06 15:20:57 -0500
+categories: personal-projects
+---
+
+Happy summer y'all!  With the warm weather coming around and thoughts of ChatGPT brewing in my head, I decided to skip the May and June posts to put together something a little bit more robust.
+
+ChatGPT has been all the rage these days, and while I have used it here and there as an advanced search tool or a code completion tool, I wanted to take time and dig *deep* to see how ChatGPT would do human-style analysis.
+
+Being a hockey fan, a gamer, and a nerd, I thought it would be fun to use my existing XBS videogame hockey league tools to extract data, provide it to ChatGPT, and allow ChatGPT to act as a sports analyst. 
+
+My hypothesis was that if I primed ChatGPT on hockey, XBS, and then provided it with the regular season team statistics and player statistics, it could:
+
+- Analyze team composition
+- Assess and compare players
+- Offer predictions about player performance
+- Offer guidance about how to build better teams
+
+# Teaching ChatGPT about XBS
+
+First, I primed it about XBS, videogame hockey, etc.  It knew that the league somewhat resembled hockey, and could rely on hockey or sports-related data points to formulate its responses.
+
+It didn't need much.  Videogame and hockey was all it needed, and it was able to understand the rest.
+
+![gpt-1](/assets/gpt-1.png)
+
+I gave it XML data, which was scraped and stored from the screenscraping tools I talked about in a [previous blog post](https://ravib.dev/personal-projects/2023/01/29/xbs-cardmaker-1.html).  
+
+If you're wondering why it's XML, it's because the league has some Excel wizards, and I wanted to be able to share the data with them easily for them to use.  JSON didn't work as well with Excel when I wrote all of these tools five years ago.
+
+```
+<!-- Provided data in this format for all 12 teams -->
+<StatsTeam>
+<Season>37</Season>
+<TeamName>Buffalo Sabres</TeamName>
+<TeamAbbreviation>BUF</TeamAbbreviation>
+<GamesPlayed>66</GamesPlayed>
+<GoalsFor>228</GoalsFor>
+<GoalsAgainst>166</GoalsAgainst>
+<Hits>854</Hits>
+<PIM>167</PIM>
+<Shots>1092</Shots>
+<Wins>44</Wins>
+<Loss>20</Loss>
+<OTL>2</OTL>
+<Points>90</Points>
+</StatsTeam>
+```
+ChatGPT didn't need anything else.  It was able to demonstrate that it understood what was provided:
+
+![gpt-2](/assets/gpt-2.png)
+
+Great, now onto the players!
+
+# Feeding Player Data to ChatGPT
+
+Brace yourself, because things get weird here! 
+
+ChatGPT has a text limit, and an XML file with 120 records far exceeds that.  My first strategy was to feed it the players team-by-team:
+
+![gpt-3](/assets/gpt-3.png)
+
+## What even is an XML array of data??
+ChatGPT seemed to accept this data. I did the same for Colorado, assuming I would now have 20 players in the system.
+However, when I started asking it questions about the Buffalo players, it seemed like it could only parse the first 4 records out of the 10 provided.  The screenshot here is too big to fit all into one thing, so I'll provide a chatlog:
+
+```
+User
+how many players played on colorado?
+
+ChatGPT
+Based on the provided data, there are a total of 4 players who have played for the Colorado team.
+
+User
+really?
+
+ChatGPT
+Apologies for the confusion. Based on the provided data, there are 3 players who have played for the Colorado team.
+
+User
+you sure about that?
+
+ChatGPT
+Apologies for the incorrect information earlier. Upon reviewing the provided data, there are indeed 4 players who have played for the Colorado team.
+
+User
+how many player elements were provided to you for buffalo?
+
+ChatGPT
+For the Buffalo team, a total of 4 <Player> elements were provided.
+
+User
+how about for colorado?
+
+ChatGPT
+For the Colorado team, a total of 4 <Player> elements were provided as well.
+
+User
+output carson gibson's raw XML
+
+ChatGPT
+Here is the raw XML data for Carson Gibson:
+(Intentionally omitted to save space)
+
+User
+output Nash1071's raw XML
+
+ChatGPT
+I apologize, but the XML data for Nash1071 was not provided in the information you shared with me. Therefore, I cannot provide the raw XML for Nash1071. If you have the XML data for Nash1071, please provide it, and I'll be happy to assist you further.
+
+```
+There's some interesting tidbits here:
+
+1. It did, in fact, only parse 4 of the 10 objects provided per-post, because it couldn't provide the raw XML I fed it initially 
+2. At one point it said it only had 3 elements, but then remembered it had 4
+
+The XML was standard-compliant and all serialized/deserialized by .NET, so I'm not sure what problems ChatGPT had with understanding the spec and reading the data. 
+
+From there I resorted to adding data player by player.  ChatGPT was better able to understand the XML when it was a single object per post, however I quickly ran into throttle limits.  Fortunately it's generous and only takes an hour. 
+
+With the data loaded, I was able to play with ChatGPT and gain insights about the league.
+
+# Lessons Learned
+
+## ChatGPT learns better through dialogue
+
+With the raw data, ChatGPT was able to make a lot of interesting assessments.  However, there were assessments where it refused to give an assessment based on the given data:
+
+![gpt-4](/assets/gpt-4.png)
+
+I didn't have that raw data to provide to ChatGPT, but I could do some assessments by comparing one team to the other and drawing some conclusion based on that.
+
+I wrote a .NET console app that takes the [accumulated stats for the hockey cards I talked about in a previous post](https://ravib.dev/personal-projects/2023/01/29/xbs-cardmaker-3.html)and output it into a text-based format.  It accumulates all stats for the player, but treats the player as having only played one position.  This was done because the hockey cards only display one position as the player's primary position, but needs to show all stats.  
+
+I also tried to do some manual analysis in the form of anecdotes, to give ChatGPT some hints about if 
+```
+// Sample Method
+
+        private string GenerateGoalieDetails(AccumulatedStats stats)
+        {
+            var sb = new StringBuilder();
+            sb.AppendLine(stats.Gamertag + " played " + stats.Position + " for " + TeamNameHelper.ResolveTeam(stats.LastTeam));
+            sb.AppendLine(stats.Gamertag + " had the following stats in " + stats.GoalieGamesPlayed + " games: ");
+
+            sb.AppendLine("Goals Against Average: " + stats.GoalieGAA);
+            sb.AppendLine("Saves: " + stats.GoalieSaves);
+            sb.AppendLine("Goalie Save Percentage: " + stats.GoalieSavePct);
+            sb.Append("Saves Per Game: " + Decimal.Divide(stats.GoalieSaves.Value, stats.GoalieGamesPlayed.Value));
+            sb.Append(GenerateAnecdotes(stats));
+
+            return sb.ToString();
+
+        }
+
+// Resulting text
+
+XBS is a videogame hockey league played on EA Sports NHL videogame for Xbox. 
+Protagun1st played Goalie for Buffalo
+Protagun1st had the following stats in 42 games: 
+Goals Against Average: 2.17
+Saves: 561
+Goalie Save Percentage: 0.856
+Saves Per Game: 13.357142857142857142857142857
+Anecdotes: Was a good goalie overall.  Played on an excellent team. 
+
+```
+
+ChatGPT was able to accept this data, but the end result was hit-or-miss.  Giving ChatGPT some anecdotes helped, but it took them at face value and refused to elaborate on them.  Summarizing the data hurt it, because it couldn't factor in a player's utility to an assessment.
+
+Instead, I chose to have a conversation with ChatGPT.  I started a different chat that did not have the anecdotes provided, and talked to it:
+
+![gpt-5](/assets/gpt-5.png)
+
+Through some dialogue, conversation, and stiff-arming, I was able to get ChatGPT to give me some of the analysis I was looking to get from it. 
+
+## ChatGPT is forgetful! 
+
+ChatGPT seems to work on a per-chat-session basis.  It doesn't retain data between chats, nor does it really seem to persist any data from chats, but it is able to use data in the chat history.  You may have noticed in some previous screenshots I said something to the effect of "In our chat history, I gave given you...".  It seems to like to look into a little bit of the recent chat history, but not the full chat history.  
+
+When I don't remind it that it has data, it does something to this effect: 
+
+![gpt-6](/assets/gpt-6.png)
+
+Referring back to the previous section, when I reminded it about the fact that it had stats, it would actually use the stats.
+
+Over a period of time, it also forgets the initial instruction set.  Consider how I fed it player details bit by bit:
+
+![gpt-7](/assets/gpt-7.png)
+
+It followed my response instruction for the first ~60 players or so. Eventually it started sending its own responses:
+
+![gpt-8](/assets/gpt-8.png)
+
+Eventually it went back to the default of parroting what I would tell it:
+
+![gpt-9](/assets/gpt-9.png)
+
+If you don't remind it of what you told it earlier, it will forget.  
+
+## It says the right-sounding things, but not always the right things
+
+Consider this prompt:
+
+![gpt-10](/assets/gpt-10.png)
+
+It's able to say things that sound right about each specific area of hockey, and able to pull on its knowledge of players in specific roles.
+
+However, Arizona was the best team in the league.  They had the best offense, the best defense, good-enough goaltending, and led the league in regular season points, based purely on statistics.  ChatGPT knows all of this.  Its response of "get better in every area" sounds brilliant on paper, but when you dig into it the advice doesn't make sense.
+
+I tried to narrow it down, and it said that Arizona should improve on its offense, which is already its greatest strength:
+
+![gpt-11](/assets/gpt-11.png)
+
+It *could* be right, but subjectively it sounds like the wrong area for the team to target. 
+
+## It makes things up
+
+When asked to do a power ranking of all the teams, it started doing some crazy things.
+
+First, it ranked Arizona at #9.  Arizona was by every metric and in actuality the best team in the league:
+
+> Arizona Coyotes: Despite challenges, DesiredCustoms (Points: 63) demonstrated notable offensive capabilities, helping the Coyotes secure a respectable position.
+
+It also invented the Pittsburgh Penguins, a team that doesn't exist in our league and for which no data was provided, and invented a goalie named ZOOM with fake stats:
+
+> Pittsburgh Penguins: ZOOM (Goals Against Average: 2.24, Save Percentage: 0.848) stands out as a reliable goaltender, aiding the Penguins' defensive efforts and keeping them competitive.
+
+I have no idea what, why or how this happened! 
+
+## It can absolutely ROAST people
+
+I won't share much here, but if you ask ChatGPT to write a Comedy Central style roast of someone and to cite specific examples based on what it knows, the results are hilarious.  I'm not ashamed to admit I spent hours prompting it for roasts and laughing at the results :D 
+
+
+# Conclusion and Next Steps
+
+ChatGPT is extremely interesting in this regard.  It can take in raw data, make some assessments on it, and provide some hard-hitting virtual hockey analysis!  It also does some bizarre things and gets its assessments subjectively wrong.  In its worst cases, it's completely out in left field (or should I say the press box?)
+
+What I'd like to do next to help it is:
+
+1. Revise the dialogue aspect to provide more data points per player, even if it's longer
+2. Give ChatGPT some additional data, specifically around rankings of teams and players
+3. For each stat, give ChatGPT an nth percentile score or ranking relative to other players in the league
+4. Give it some funnier hints about players (I.E players who have funny personalities not included in stats) that it can include in write-ups
+
+My guess is that with some additional data and more hints, it could produce even better results. 
