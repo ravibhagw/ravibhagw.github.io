@@ -1,0 +1,218 @@
+---
+layout: post
+title:  "Creating a Discord Bot in Golang"
+date:   2023-10-14 17:28:00 -0500
+categories: personal-projects
+---
+
+What a great summer 2023 it was!  Fall means cooler weather, hockey season, and more time indoors.  That means it's time to tinker yet again, and this time I challenged myself to write a Discord bot in Golang.
+
+# Project Idea
+
+For the last few years I've tinkered around with various forms of pulling EA Sports NHL videogame data from EA Sports's website.  They offer a pretty nice [website](https://www.ea.com/games/nhl/nhl-24/pro-clubs/rankings) that returns data from the online games played for their "EASHL" game mode. What they display is a small subset of a much larger amount of data.
+
+I wanted to build a Discord bot that could take a select few teams and pull up the data for their recent games. 
+
+# Retrieving the Data
+
+Getting the API calls took a bit of detective work.  For a few years EA used to have OpenAPI Spec docs available for the APIs, but they disabled them to the public a few years ago.  Fortunately the APIs can still be called.  They'll block cross-origin requests from browsers and prevent XSS, but they can be called in other ways:
+
+![console](/assets/2023-10-chrome-console.PNG)
+
+I had an old Golang project that I built in 2022 just before I took an Engineering Manager gig working in a Golang shop.  It did 90% of what I needed, calling the APIs and parsing the APIs into structs.  Originally it wrote the data to a relational database (Sqlite) that I could share with our advanced stat gurus to perform some data analytics wizardry. 
+
+All I had to do was rip out the batch job trigger and the Sqlite persistence, and write the Discord bot logic to retrieve, format, and send back the data. 
+
+# Creating the Discord Bot
+
+## Setting up the Discord Bot
+
+Discord has a developer mode and some tools that let you set up the bot. Getting the keys set up and the permissions set up is pretty easy through the Discord Developer Portal.
+
+![portal](/assets/2023-10-discord-bot-setup.png)
+
+Discord has [excellent documentation](https://discord.com/developers/docs/getting-started) on how to do this. 
+
+## Building the Bot
+
+[DiscordGo](https://github.com/bwmarrin/discordgo) package is very robust, covers a large portion of the Discord chat client API.
+
+It could not be simpler to set up.  Once you have your token set up and your app permissions set, you can get started in a few lines!
+
+```
+func main() {
+
+	dg, err := discordgo.New("Bot " + token)
+	if err != nil {
+		panic(err)
+	}
+	dg.AddHandler(messageCreate)
+	dg.Identify.Intents = discordgo.IntentsGuildMessages
+	dg.Identify.Intents |= discordgo.IntentMessageContent
+
+	err = dg.Open()
+	defer dg.Close()
+
+	if err != nil {
+		panic(err)
+	}
+
+	fmt.Println("Bot is now active and listening")
+	sc := make(chan os.Signal, 1)
+	signal.Notify(sc, syscall.SIGINT, syscall.SIGTERM, os.Interrupt, os.Kill)
+	<-sc
+
+}
+```
+(side note, the `defer` statement in Golang is one of my favourite small additions the language adds for developers)
+
+In this case, the bot is designed to handle messages in Discord channels and respond appropriately.  Even the handler code is pretty intuitive:
+
+
+```
+func messageCreate(s *discordgo.Session, m *discordgo.MessageCreate) {
+	// Ignore all messages created by the bot itself
+	if m.Author.ID == s.State.User.ID {
+		return
+	}
+
+	fmt.Println(m.Content)
+	if strings.HasPrefix(m.Content, "!recentgames") {
+		splitStrs := strings.SplitAfter(m.Content, "\"")
+
+        if len(splitStrs) != 3 {
+			fmt.Println(strconv.Itoa(len(splitStrs)))
+			sendUsage(s, m)
+			return
+		}
+
+		teamName := strings.Trim(splitStrs[1], "\"")
+		teamId, err := GetTeamIdByNameCached(teamName)
+
+		if err != nil {
+			s.ChannelMessageSend(m.ChannelID, err.Error())
+			s.ChannelMessageSend(m.ChannelID, "could not resolve team name: "+teamName)
+			return
+		}
+		s.ChannelMessageSend(m.ChannelID, "OK, bear with me while I look up the recent games!")
+
+		recentGames := LoadMatchResults(teamId)
+
+		for _, game := range recentGames {
+			_, err := s.ChannelMessageSend(m.ChannelID, game.ToDiscordFormat())
+			if err != nil {
+				s.ChannelMessageSend(m.ChannelID, "Unexpected error, please contact the developer")
+				panic(err)
+			}
+		}
+	}
+}
+```
+
+After ignoring self-messages, the code looks for a special type of message it wishes to respond to (!recentgames), parses the input, and returns the data in a specially formatted string.
+
+## Testing the Bot
+
+Again, it's another piece of ingenious intuivity (is that a word?) from the Discord team.  Running your bot brings the bot into an online state in Discord.  
+
+For a bot like this, you just have to add it to a Discord server and start talking to it in a channel.  No fancy configurations, no mock endpoints from the command line, custom developer IDEs, containerized instances to run, or anything like that.  
+
+Yes, you are technically testing "live" in a production environment, from the perspective that Discord doesn't have a developer environment, but you are also testing a version of your bot that's unreleased in a private manner.
+
+![portal](/assets/2023-10-discord-bot-results.png)
+
+# Results
+
+The actual output data looks something like this.  I have omitted the second team for readability.  
+
+```
+Match: 506384010129
+XBS Team1 : 1
+Bot Users : 3
+XBS Team1 Shots: 13
+Bot Users Shots: 12
+XBS Team1 TOA: 5:48
+Bot Users TOA: 6:55
+XBS Team1 Players: 
+GT         G    A    P    Hit +\-    S    S%   Ppg  Shg  Pass%    Pims FO%    
+-----
+Chilllt    0    1    1    7    -1    5    0    0    0    80.95    0    0
+DustyRy    0    1    1    5    -1    1    0    0    0    81.25    0    62.5
+Reverse    1    0    1    1    -1    2    50   0    0    56.25    2    0
+Nico 91    0    0    0    6    -1    3    0    0    0    88.89    6    0
+oSniiff    0    0    0    1    -1    2    0    0    0    66.67    0    0
+XBS Team1 Goalies: 
+GT         GAA     SA   SV    SV%    
+-----
+BleedBl    3.00    9    12    0.750
+
+```
+
+Unfortunately, I could not display *all* of the data available in the API because of the `4000` character limit for a Discord message.  
+
+The API data is pretty robust though!  There's tons of interesting data points.  One of my next projects will be to build a nice matchup struct and store all matchups in a documentDb, so that the more interesting data points can be pulled and explored:
+
+```
+package models
+
+import "github.com/ravibhagw/xbs_adv_stats/enums"
+
+type SkaterStat struct {
+	Goals             int `json:"skgoals,string"`
+	Assists           int `json:"skassists,string"`
+	Points            int
+	Hits              int     `json:"skhits,string"`
+	Plusminus         int     `json:"skplusmin,string"`
+	ShotAttempts      int     `json:"skshotattempts,string"`
+	Shots             int     `json:"shots,string"`
+	ShootingPct       float32 `json:"shokshotpct,string"`
+	Deflections       int     `json:"skdeflections,string"`
+	Ppg               int     `json:"skppg,string"`
+	Shg               int     `json:"skshg,string"`
+	Passattempts      int     `json:"skpassattempts,string"`
+	Passcomplete      int     `json:"skpasses,string"`
+	Passpct           float32 `json:"skpasspct,string"`
+	Saucerpasses      int     `json:"sksaucerpasses,string"`
+	Offrating         float32 `json:"ratingOffense,string"`
+	Defrating         float32 `json:"ratingDefense,string"`
+	Teamrating        float32 `json:"ratingTeamplay,string"`
+	Blockedshots      int     `json:"skbs,string"`
+	Takeaways         int     `json:"sktakeaways,string"`
+	Interceptions     int     `json:"skinterceptions,string"`
+	Giveaways         int     `json:"skgiveaways,string"`
+	PimsDrawn         int     `json:"skpenaltiesdrawn,string"`
+	Pim               int     `json:"skpim,string"`
+	Pkclears          int     `json:"skpkclearzone,string"`
+	PossessionSeconds int     `json:"skpossession,string"`
+	Faceoffwins       int     `json:"skfow,string"`
+	Faceoffloss       int     `json:"skfol,string"`
+	Faceoffpct        float32 `json:"skfopct,string"`
+	ToiSeconds        int     `json:"toiseconds,string"`
+	Scoredgwg         int     `json:"skgwg,string"`
+
+	Gamertag    string            `json:"playername"`
+	ClassPlayed enums.PlayerClass `json:"class,string"`
+
+	PositionSelected string `json:"position"`
+
+	Savepct          float32 `json:"glsavepct,string"`
+	Shotsagainst     int     `json:"glshots,string"`
+	Saves            int     `json:"glsaves,string"`
+	Gaa              float32 `json:"glgaa,string"`
+	Breakawayshots   int     `json:"glbrkshots,string"`
+	Breakawaysaves   int     `json:"glbrksaves,string"`
+	Breakawaysavepct float32 `json:"glbrksavepct,string"`
+	Desperationsaves int     `json:"gldsaves,string"`
+	Pokechecks       int     `json:"glpokechecks,string"`
+	Penaltyshots     int     `json:"glpenshots,string"`
+	Penaltyshotsaves int     `json:"glpensaves,string"`
+	Penaltysavepct   float32 `json:"glpensavepct,string"`
+	ShutoutPeriods   int     `json:"glsoperiods,string"`
+
+	TeamId   string
+	TeamName string
+}
+
+```
+
+That's a project for another time though!  For now, I'm glad that I got a chance to play with a Discord bot :) 
