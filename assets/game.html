@@ -1,0 +1,170 @@
+<html>
+<head>
+    <style>
+        canvas {
+            border: 1px solid #000;
+            display: block;
+            margin: 20px auto;
+        }
+    </style>
+    <title>Simple Game</title>
+</head>
+<body>
+    <canvas id="gameCanvas" width="1280" height="720"></canvas>
+    <script>
+        const canvas = document.getElementById('gameCanvas');
+        const ctx = canvas.getContext('2d');
+
+        const player = {
+            x: 50,
+            y: 50,
+            width: 30,
+            height: 30,
+            speed: 5,
+            jumping: false,
+            jumpHeight: 100,
+            velocityY: 0
+        };
+
+        const platforms = [
+            { x: 0, y: 200, width: 200, height: 20 },
+            { x: 200, y: 600, width: 200, height: 20 },
+            { x: 250, y: 100, width: 200, height: 20 },
+            { x: 300, y: 300, width: 200, height: 20 },
+            { x: 400, y: 600, width: 200, height: 20 },
+            { x: 450, y: 500, width: 200, height: 20 },
+            { x: 600, y: 50, width: 200, height: 20 },
+            { x: 600, y: 400, width: 200, height: 20 },
+            { x: 800, y: 600, width: 200, height: 20 },
+            { x: 900, y: 250, width: 200, height: 20 },
+            { x: 1000, y: 600, width: 200, height: 20 },
+        ];
+
+        const coins = Array.from({ length: 10 }, (_, index) => {
+            const platformIndex = Math.floor(Math.random() * platforms.length);
+            const platform = platforms[platformIndex];
+            const distanceFromPlatform = 50;
+            return {
+                x: platform.x + Math.random() * (platform.width - 30),
+                y: platform.y - distanceFromPlatform - Math.random() * 50,
+                width: 20,
+                height: 20,
+                collected: false
+            };
+        });
+
+        let score = 0;
+
+        function draw() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+
+            ctx.fillStyle = 'blue';
+            ctx.fillRect(player.x, player.y, player.width, player.height);
+
+            // Draw platforms
+            ctx.fillStyle = 'green';
+            platforms.forEach(platform => {
+                ctx.fillRect(platform.x, platform.y, platform.width, platform.height);
+            });
+
+            ctx.fillStyle = 'yellow';
+            coins.forEach(coin => {
+                if (!coin.collected) {
+                    ctx.fillRect(coin.x, coin.y, coin.width, coin.height);
+                }
+            });
+
+            ctx.fillStyle = 'black';
+            ctx.font = '20px Arial';
+            ctx.fillText(`Score: ${score}`, 10, 30);
+        }
+
+        function update() {
+            if (keys['ArrowLeft'] && player.x > 0) {
+                player.x -= player.speed;
+            }
+
+            if (keys['ArrowRight'] && player.x + player.width < canvas.width) {
+                player.x += player.speed;
+            }
+
+            // Apply gravity
+            if (player.y + player.height < canvas.height) {
+                player.velocityY += 1;
+            } else {
+                player.velocityY = 0;
+                player.jumping = false;
+            }
+
+            if (keys['ArrowUp'] && !player.jumping) {
+                player.velocityY -= 15;
+                player.jumping = true;
+            }
+
+            player.y += player.velocityY;
+
+            platforms.forEach(platform => {
+                if (
+                    player.x < platform.x + platform.width &&
+                    player.x + player.width > platform.x &&
+                    player.y + player.height > platform.y &&
+                    player.y < platform.y + platform.height
+                ) {
+                    player.velocityY = 0;
+                    player.y = platform.y - player.height;
+                    player.jumping = false;
+                }
+            });
+
+            coins.forEach(coin => {
+                if (
+                    player.x < coin.x + coin.width &&
+                    player.x + player.width > coin.x &&
+                    player.y + player.height > coin.y &&
+                    player.y < coin.y + coin.height &&
+                    !coin.collected
+                ) {
+                    coin.collected = true;
+                    score++;
+
+                    if (score === 10) {
+                        alert('You win!');
+                        resetGame();
+                    }
+                }
+            });
+        }
+
+        function resetGame() {
+            player.x = 50;
+            player.y = 50;
+            score = 0;
+
+            coins.forEach(coin => {
+                coin.collected = false;
+                coin.x = Math.random() * (canvas.width - 30);
+                coin.y = Math.random() * (canvas.height - 30);
+            });
+        }
+
+        function gameLoop() {
+            update();
+            draw();
+            requestAnimationFrame(gameLoop);
+        }
+
+        // Keyboard input handling
+        const keys = {};
+        window.addEventListener('keydown', e => {
+            keys[e.key] = true;
+        });
+
+        window.addEventListener('keyup', e => {
+            keys[e.key] = false;
+        });
+
+        gameLoop();
+    </script>
+</body>
+</html>
