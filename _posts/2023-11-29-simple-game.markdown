@@ -7,4 +7,6 @@ categories: personal-projects
 
 Oh look, a very simple game written in Javascript.  Fun!
 
-<iframe src="assets/game.html">
+
+<iframe src="../assets/game.html">
+
