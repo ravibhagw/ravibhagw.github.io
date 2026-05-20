@@ -23,7 +23,10 @@ jobs:
       - uses: ruby/setup-ruby@v1
         with:
           ruby-version: "3.3"
-          bundler-cache: true
+          bundler-cache: false
+
+      - name: Install dependencies
+        run: bundle install
 
       - name: Build site
         run: JEKYLL_ENV=production bundle exec jekyll build -d ./_site
