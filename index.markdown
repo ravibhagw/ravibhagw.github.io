@@ -1,4 +1,4 @@
 ---
 layout: home
-title: Ravi Bhagwandin
+author_profile: true
 ---

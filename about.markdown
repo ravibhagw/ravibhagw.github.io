@@ -1,7 +1,8 @@
 ---
-layout: post
+layout: single
 title: About
 permalink: /about/
+author_profile: true
 ---
 
 Hi, I'm **Ravi** — a software developer and engineering leader based in Toronto, Canada.
@@ -26,7 +27,7 @@ Outside of work, I gravitate toward projects that scratch a creative or analytic
 
 A lot of my side projects revolve around a private online hockey league I've played in for years. Over time that's produced an API wrapper, a stats pipeline, a WPF draft tool, and more. It's a good excuse to learn new languages and tools in a context that keeps me motivated.
 
-I also occasionally write about what I'm learning and working on. You can find those posts on the [blog](/).
+I also occasionally write about what I'm learning and working on. You can find those posts on the [blog](/blog/).
 
 ## Get in Touch
 

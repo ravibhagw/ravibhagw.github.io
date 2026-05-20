@@ -1,50 +1,79 @@
 title: Ravi Bhagwandin
-author: Ravi Bhagwandin
-url: "https://ravib.dev"
-baseurl: ""
+name: Ravi Bhagwandin
 description: >
   Software developer based in Toronto. I write about software engineering,
   leadership, and whatever else is on my mind. All opinions are my own.
+url: "https://ravib.dev"
+baseurl: ""
 
-permalink: /:slug
+remote_theme: mmistakes/minimal-mistakes@4.26.2
+minimal_mistakes_skin: dark
 
-twitter:
-  username: ravibhagw
-  card: summary_large_image
+author:
+  name: "Ravi Bhagwandin"
+  bio: "Software developer and engineering leader based in Toronto. 10+ years across the stack."
+  location: "Toronto, Canada"
+  links:
+    - label: "GitHub"
+      icon: "fab fa-fw fa-github"
+      url: "https://github.com/ravibhagw"
+    - label: "Twitter"
+      icon: "fab fa-fw fa-twitter-square"
+      url: "https://twitter.com/ravibhagw"
 
-remote_theme: abhinavs/moonwalk
+# Site footer
+footer:
+  links:
+    - label: "GitHub"
+      icon: "fab fa-fw fa-github"
+      url: "https://github.com/ravibhagw"
+    - label: "Twitter"
+      icon: "fab fa-fw fa-twitter-square"
+      url: "https://twitter.com/ravibhagw"
+    - label: "Feed"
+      icon: "fas fa-fw fa-rss-square"
+      url: "/feed.xml"
 
-theme_config:
-  appearance: "dark"
-  appearance_toggle: true
-  date_format: "%B %-d, %Y"
-  show_description: true
-  show_navbar: true
-  show_footer: true
-  show_copyright: true
-  show_projects: true
-  show_blog: true
-  show_old_projects: true
-  show_misc_list: false
-  show_reading_time: true
-  show_tags: true
-  show_code_copy: true
-  show_progress_bar: true
-  show_back_to_top: true
-  show_post_nav: true
-  show_toc: false
-  show_footnote_tooltips: true
-  show_link_previews: false
-  home:
-    title_projects: Portfolio
-    title_blog: Recent Posts
-    title_old_projects: More Projects
+# Reading files
+include:
+  - _pages
 
+# Plugins
 plugins:
-  - jekyll-feed
+  - jekyll-paginate
   - jekyll-sitemap
-  - jekyll-seo-tag
+  - jekyll-gist
+  - jekyll-feed
+  - jekyll-include-cache
   - jekyll-remote-theme
+
+# Pagination
+paginate: 5
+paginate_path: /blog/page:num/
+
+# Permalinks
+permalink: /:year/:month/:day/:title/
+
+# Defaults
+defaults:
+  # Posts
+  - scope:
+      path: ""
+      type: posts
+    values:
+      layout: single
+      author_profile: true
+      read_time: true
+      comments: false
+      share: false
+      related: true
+  # Pages
+  - scope:
+      path: ""
+      type: pages
+    values:
+      layout: single
+      author_profile: true
 
 highlighter: rouge
 
@@ -52,5 +81,5 @@ sass:
   style: :compressed
 
 exclude:
-  - Gemfile.lock
   - vendor/
+  - .bundle/
