@@ -1,0 +1,62 @@
+navbar_entries:
+  - title: about
+    url: about
+
+  - title: blog
+    url: blog
+
+  - title: github
+    url: https://github.com/ravibhagw
+
+project_entries:
+  - title: XBS Advanced Stats
+    url: https://github.com/ravibhagw/xbs-adv-stats-api
+    desc: >
+      A Go-based stats pipeline for an online hockey league — API server,
+      background job processor, and shared library. Pulls, stores, and
+      serves advanced player and club statistics.
+
+  - title: XBS Explorer
+    url: https://github.com/ravibhagw/XBSExplorer
+    desc: >
+      A TypeScript RESTful API for exploring XBS league statistics.
+      Clean REST interface over scraped league data.
+
+  - title: chelstats
+    url: https://github.com/ravibhagw/chelstats
+    desc: >
+      JavaScript wrapper around the EA Sports NHL Pro Clubs API.
+      Retrieves EASHL club and player data programmatically.
+
+  - title: SQL Injection Demo
+    url: https://github.com/ravibhagw/samples-sql-injection
+    desc: >
+      Educational demo app illustrating SQL injection vulnerabilities
+      and mitigations, built to accompany a YouTube explainer.
+
+old_project_entries:
+  - title: XBS Draft Manager
+    url: https://github.com/ravibhagw/XBSDraftManager
+    desc: WPF desktop app for draft management and player scouting in XBS leagues.
+
+  - title: XBS Data Scraper
+    url: https://github.com/ravibhagw/XBSDataScraper
+    desc: C# scraper that loads and parses XBS league pages to collect player, team, and season stats.
+
+  - title: XBS Core Parser
+    url: https://github.com/ravibhagw/XBS.Core.Parser
+    desc: NuGet library for parsing XBS league data formats.
+
+  - title: Advent of Code 2024
+    url: https://github.com/ravibhagw/advent-of-code-2024
+    desc: Python solutions for Advent of Code 2024.
+
+footer_entries:
+  - title: github
+    url: https://github.com/ravibhagw
+
+  - title: twitter
+    url: https://twitter.com/ravibhagw
+
+  - title: feed
+    url: feed.xml

@@ -1,52 +1,56 @@
-# Welcome to Jekyll!
-#
-# This config file is meant for settings that affect your whole blog, values
-# which you are expected to set up once and rarely edit after that. If you find
-# yourself editing this file very often, consider using Jekyll's data files
-# feature for the data you need to update frequently.
-#
-# For technical reasons, this file is *NOT* reloaded automatically when you use
-# 'bundle exec jekyll serve'. If you change this file, please restart the server process.
-#
-# If you need help with YAML syntax, here are some quick references for you:
-# https://learn-the-web.algonquindesign.ca/topics/markdown-yaml-cheat-sheet/#yaml
-# https://learnxinyminutes.com/docs/yaml/
-#
-# Site settings
-# These are used to personalize your new site. If you look in the HTML files,
-# you will see them accessed via {{ site.title }}, {{ site.email }}, and so on.
-# You can create any custom variable you would like, and they will be accessible
-# in the templates via {{ site.myvariable }}.
+title: Ravi Bhagwandin
+author: Ravi Bhagwandin
+url: "https://ravib.dev"
+baseurl: ""
+description: >
+  Software developer based in Toronto. I write about software engineering,
+  leadership, and whatever else is on my mind. All opinions are my own.
 
-title: Personal Blog
-description: >- # this means to ignore newlines until "baseurl:"
-  This is my personal blog.  I'll use it to discuss software development, leadership, or whatever else is on my mind at the moment.  All opinions are my own and do not reflect those of my employers, past or present. 
-baseurl: "" # the subpath of your site, e.g. /blog
-url: "https://ravibhagw.github.io" # the base hostname & protocol for your site, e.g. http://example.com
-twitter_username: ravibhagw
-github_username:  ravibhagw
+permalink: /:slug
 
-# Build settings
-theme: minima
+twitter:
+  username: ravibhagw
+  card: summary_large_image
+
+remote_theme: abhinavs/moonwalk
+
+theme_config:
+  appearance: "dark"
+  appearance_toggle: true
+  date_format: "%B %-d, %Y"
+  show_description: true
+  show_navbar: true
+  show_footer: true
+  show_copyright: true
+  show_projects: true
+  show_blog: true
+  show_old_projects: true
+  show_misc_list: false
+  show_reading_time: true
+  show_tags: true
+  show_code_copy: true
+  show_progress_bar: true
+  show_back_to_top: true
+  show_post_nav: true
+  show_toc: false
+  show_footnote_tooltips: true
+  show_link_previews: false
+  home:
+    title_projects: Portfolio
+    title_blog: Recent Posts
+    title_old_projects: More Projects
+
 plugins:
   - jekyll-feed
+  - jekyll-sitemap
+  - jekyll-seo-tag
+  - jekyll-remote-theme
 
-# Exclude from processing.
-# The following items will not be processed, by default.
-# Any item listed under the `exclude:` key here will be automatically added to
-# the internal "default list".
-#
-# Excluded items can be processed by explicitly listing the directories or
-# their entries' file path in the `include:` list.
-#
-# exclude:
-#   - .sass-cache/
-#   - .jekyll-cache/
-#   - gemfiles/
-#   - Gemfile
-#   - Gemfile.lock
-#   - node_modules/
-#   - vendor/bundle/
-#   - vendor/cache/
-#   - vendor/gems/
-#   - vendor/ruby/
+highlighter: rouge
+
+sass:
+  style: :compressed
+
+exclude:
+  - Gemfile.lock
+  - vendor/
